@@ -1,0 +1,22 @@
+.card-category-main {
+  height: 20vh;
+  background-color: rgb(213, 150, 56);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px 0px;
+  // width: 18vh;
+  width: 115px;
+  flex-direction: column;
+  line-height: 20px;
+}
+
+.container-cards-main {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+

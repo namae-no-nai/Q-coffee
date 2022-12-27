@@ -1,0 +1,24 @@
+<div class="head-category">
+  <h4>Gosto</h4>
+</div>
+
+<div class= "container-sub-categories">
+  <% @selection.each_with_index do |select, index| %>
+   <h4><strong> <%= "Gosto: #{@category_taste[index]}"%></strong></h4>
+    <% select[0..1].each do |cafe|%>
+      <div class="card-product-category">
+      <% if 2 == 1%>  
+        <%# if cafe.photo.attached? %>
+        <%= cl_image_tag cafe.photo.key, style:"width: 150px; height: 150px; crop: :fill" %>
+     <% else %>
+       <%= image_tag "coffee-pack.png",style:"width: 150px; height: 150px; crop: :fill"%>
+     <% end %>
+        <div class="card-product-info-category">
+        <h5><strong><%= link_to cafe.name, cafe %></strong></h5>
+          <h6><%= cafe.brand %></h6>
+          <h6>Gosto: <%= cafe.taste %></h6>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

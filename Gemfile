@@ -11,6 +11,7 @@ gem "font-awesome-sass", "~> 6.1"
 gem "jbuilder"
 gem "jsbundling-rails"
 gem "pg", "~> 1.1"
+gem 'pg_search', '~> 2.3', '>= 2.3.6'
 gem "puma", "~> 5.0"
 gem "rails", "~> 7.0.4"
 gem "sassc-rails"

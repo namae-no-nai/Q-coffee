@@ -1,7 +1,19 @@
 .avatar {
-  width: 40px;
+  height: 100px;
+  width: 100px;
   border-radius: 50%;
+  object-fit: cover;
+  margin-top: -30px;
 }
+
+#avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: -30px;
+}
+
 .avatar-large {
   width: 56px;
   border-radius: 50%;

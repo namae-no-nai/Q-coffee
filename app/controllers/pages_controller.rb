@@ -7,32 +7,26 @@ class PagesController < ApplicationController
   end
 
   def roast
-    @category_roast = Coffee.all.pluck(:roast).uniq
-    @selection = []
-    @category_roast.each do |roast|
-      @selection << Coffee.category_search(roast)
-    end
+    filter('roast')
   end
 
   def sensory
-    @category_sensory = Coffee.all.pluck(:sensory).uniq
-    @selection = []
-    @category_sensory.each do |sensory|
-      @selection << Coffee.category_search(sensory)
-    end
+    filter('sensory')
   end
 
   def taste
-    @category_taste = Coffee.all.pluck(:taste).uniq
+    filter('taste')
+  end
+
+  private def filter(filter_param)
+    @filtered_category = Coffee.all.pluck(filter_param.to_sym).uniq
     @selection = []
-    @category_taste.each do |taste|
-      @selection << Coffee.category_search(taste)
+    @filtered_category.each do |filter_param|
+      @selection << Coffee.category_search(filter_param)
     end
   end
 
-  private
-
-  def set_coffee
+  private def set_coffee
     @coffees = Coffee.all
   end
 end

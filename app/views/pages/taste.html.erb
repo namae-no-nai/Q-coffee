@@ -4,7 +4,7 @@
 
 <div class= "container-sub-categories">
   <% @selection.each_with_index do |select, index| %>
-   <h4><strong> <%= "Gosto: #{@category_taste[index]}"%></strong></h4>
+   <h4><strong> <%= "Gosto: #{@filtered_category[index]}"%></strong></h4>
     <% select[0..1].each do |cafe|%>
       <div class="card-product-category">
       <% if 2 == 1%>  

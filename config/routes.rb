@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'roast', to: 'pages#roast'
   get 'sensory', to: 'pages#sensory'
   get 'taste', to: 'pages#taste'
+  get 'filter/:filter_param', to: 'pages#filter', as: 'filter'
   get 'map', to: 'coffees#coffee_map', as: 'coffee_map'
 
 

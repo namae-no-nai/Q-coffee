@@ -1,0 +1,22 @@
+<div class="head-coffees">
+  <h4>Cafés</h4>
+</div>
+
+<%= render 'shared/search' %>
+<div class="container-coffees ml-2">
+  <% @coffees.each do |coffee| %>
+    <div class="card-product mt-3">
+     <% if 2 == 1 %>
+		 # <% if coffee.photo.attached? %>
+        <%= cl_image_tag coffee.photo.key, style:"width: 150px; height: 150px; crop: :fill" %>
+     <% else %>
+       <%= image_tag "coffee-pack.png",style:"width: 150px; height: 150px; crop: :fill"%>
+     <% end %>
+        <div class="card-product-infos mt-3">
+            <h5><strong><%= link_to coffee.name, coffee_path(coffee) %></strong></h5>
+            <h6><%= coffee.brand %></h6>
+            <h6><%= coffee.sensory %>, <%= coffee.taste %></h6>
+        </div>
+    </div>
+  <% end %>
+</div>

@@ -90,28 +90,26 @@ class CoffeesController < ApplicationController
     end
   end
 
-  private
-
-  def coffee_params
+  private def coffee_params
     params.require(:coffee).permit(:name, :brand,
                                    :farm, :roast, :sensory,
                                    :origin_id, :taste,
                                    :store)
   end
 
-  def set_coffee
+  private def set_coffee
     @coffee = Coffee.find(params[:id])
     @origin = Origin.all
   end
 
-  def coffee_settings
+  private def coffee_settings
     @roast = ['clara', 'média', 'escura']
     @sensory = ['frutado', 'achocolatado', 'floral']
     @taste = ['doce', 'ácido', 'equilibrado', 'amargo']
     @origin = Origin.all
   end
 
-  def average
+  private def average
     @average = 0
     @reviews = Review.where(coffee_id: @coffee)
     if @reviews.count != 0
@@ -126,7 +124,7 @@ class CoffeesController < ApplicationController
     end
   end
 
-  def edit_permit
+  private def edit_permit
     unless current_user.id == @coffee.user_id
       redirect_to coffee_path(@coffee)
     end

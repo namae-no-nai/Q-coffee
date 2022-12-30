@@ -1,0 +1,67 @@
+<% content_for :head do %>
+  <meta property="og:url"           content="<%= coffee_url(@coffee) %> " />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="<%= @coffee.name %>"/>
+  <meta property="og:description"   content="Descubra este cafe" />
+	<meta property="og:image"         content="https://images.unsplash.com/photo-1511920170033-f8396924c348?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" />
+<% end %>
+
+<div class="top-images" id="banner">
+  <%= image_tag "field.jpg", style:"width: 100%; height: 25%;"%>
+  <div class="bottom-image", style="border-radius: 0px 75px 0px 0px; background-color: white; margin-top: 20px; width: 100%; margin: 0 auto;">
+
+       <%= image_tag "coffee-pack.png", id:"coffee-label", style:"width: 50%; height: 30%; margin-left: 10px;"%>
+      <div class="rating">
+        <% if @average == 0 %>
+        <div>
+          <h5>Café ainda não avaliado</h5>
+          <h5 style="margin: 0px 0px;">R$ 24</h5>
+        </div>
+        <% else %>
+          <h3 style="margin-left: 10px;"><strong><%= @average_float.round(2) %></strong></h3>
+          <div class="row">
+            <% @average.times do %>
+            <i class="fas fa-star", style="color: #fece02;"></i>
+          <% end %>
+          <% (5- @average).times do %>
+            <i class="far fa-star", style="color: #fece02;" ></i>
+          <% end %>
+        <% end %>
+        </div>
+        <% if @average != 0 %>
+        <h5 style="margin: 10px 0px;">R$ 24</h5>
+        <% end %>
+      </div>
+    </div>
+  <div class="container">
+
+
+    <div class="coffee-info desc d-flex row">
+      <div class="col-10">
+        <ul style="padding-left: 9px;">
+          <li><h4><small><%= @coffee.brand %></small></h4></li>
+          <li><h3><strong><%= @coffee.name %></strong></li></h3>
+          <li>Origem: <%= @coffee.origin.name %></li>
+          <li>Fazenda: <%= @coffee.farm %></li>
+          <li>Torra: <%= @coffee.roast %></li>
+          <li>Perfil sensorial: <%= @coffee.sensory %></li>
+          <li>Gosto predominante: <%= @coffee.taste %></li>
+          <li>Onde encontrar: <%= @coffee.store %> - <%= @coffee.address %></li>
+          <li>Adicionado por: <strong><%= link_to @coffee.user.first_name, user_path(@coffee.user), style:"color: black; margin-left: 0px;" %></strong></li>
+        </ul>
+      </div>
+
+      <% if user_signed_in? && current_user.id != @coffee.user_id %>
+        <% image_path =  @like.any? ? 'fas' : 'far' %>
+          <p><%= link_to "<i class='#{image_path} fa-heart', style='color: #9a2a19;'></i>".html_safe,
+                 coffee_toggle_like_path(@coffee),
+                 remote: true,
+                 method: :post,
+                 id:'heart' %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- Social media render 'share_link' -->
+

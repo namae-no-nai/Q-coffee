@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+      <div class="form-login">
+        <h2>Adicione um novo café</h2>
+        <%= simple_form_for @coffee do |f| %>
+          <%= f.input :name, label: 'Nome' %>
+          <%= f.input :brand, label: 'Marca' %>
+          <%= f.input :origin_id, collection: @origin, label: 'Origem' %>
+          <%= f.input :farm, label: 'Fazenda' %>
+          <%= f.input :sensory, collection: @sensory, label: 'Perfil Sensorial' %>
+          <%= f.input :taste, collection: @taste, label: 'Gosto' %>
+          <%= f.input :roast, collection: @roast, label: 'Tipo de Torra' %>
+          <%= f.input :store, label: 'Nome do estabelecimento' %>
+          <%#= f.input :address, label: 'Onde encontrar', input_html: {data: { 'mapbox-api-key': ENV['MAPBOX_API_KEY'] }} %>
+          <div id='coffee_address' data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+          <p>Endereço do estabelecimento</p>
+          </div>
+          <br>
+          <%= f.button :submit, "Adicionar café", class:"btn-ghost" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

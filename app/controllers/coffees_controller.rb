@@ -13,7 +13,7 @@ class CoffeesController < ApplicationController
     @reviews = Review.where(coffee_id: @coffee)
     @review = Review.new
     @like = Like.where(user_id: current_user, coffee_id: @coffee)
-    average
+    @average = calculate_average
   end
 
   def new
@@ -109,19 +109,11 @@ class CoffeesController < ApplicationController
     @origin = Origin.all
   end
 
-  private def average
-    @average = 0
-    @reviews = Review.where(coffee_id: @coffee)
-    if @reviews.count != 0
-      @reviews.each do |review|
-        @average += review.rating
-      end
-      @average_float = @average.to_f / @reviews.count
-      @average /= @reviews.count
-    else
-      @average = 0
-      @average_float = @average.to_f
-    end
+  private def calculate_average
+    reviews = Review.where(coffee_id: @coffee).pluck(:rating)
+    return 'Esse café não tem reviews ainda' if reviews.empty?
+
+    reviews.reduce(:+)/reviews.size.to_f
   end
 
   private def edit_permit

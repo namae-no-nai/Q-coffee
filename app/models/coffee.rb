@@ -1,4 +1,6 @@
 class Coffee < ApplicationRecord
+  MAIN_CATEGORIES = %w[taste sensory roast].freeze
+
   has_many :reviews, dependent: :delete_all
   belongs_to :origin
   belongs_to :user

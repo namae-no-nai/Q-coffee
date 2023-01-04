@@ -5,7 +5,7 @@
 </div>
 
 <div class= "container-cards-main my-0">
-  <% %w[taste sensory roast].each do |category| %>
+  <% Coffee::MAIN_CATEGORIES.each do |category| %>
     <%= link_to filter_path(category) do %>
       <div class="card-category-main">
         <%= image_tag("#{category}.png", style:"width: 70px; margin-top: 20px;") %>

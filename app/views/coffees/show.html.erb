@@ -13,23 +13,12 @@
        <%= image_tag "coffee-pack.png", id:"coffee-label", style:"width: 50%; height: 30%; margin-left: 10px;"%>
       <div class="rating">
         <% if @average == 0 %>
-        <div>
-          <h5>Café ainda não avaliado</h5>
-          <h5 style="margin: 0px 0px;">R$ 24</h5>
-        </div>
+          <div>
+            <h5>Café ainda não avaliado</h5>
+          </div>
         <% else %>
-          <h3 style="margin-left: 10px;"><strong><%= @average_float.round(2) %></strong></h3>
-          <div class="row">
-            <% @average.times do %>
+          <h3 style="margin-left: 10px;"><strong><%= @average %></strong></h3>
             <i class="fas fa-star", style="color: #fece02;"></i>
-          <% end %>
-          <% (5- @average).times do %>
-            <i class="far fa-star", style="color: #fece02;" ></i>
-          <% end %>
-        <% end %>
-        </div>
-        <% if @average != 0 %>
-        <h5 style="margin: 10px 0px;">R$ 24</h5>
         <% end %>
       </div>
     </div>

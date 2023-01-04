@@ -1,8 +1,4 @@
 <li data-user=<%= user.id %>>
   <%= user.email %>
-  <% if current_user.is_following?(user.id) %>
-    <%= link_to "Unfollow", unfollow_user_path(user.id), method: :post, remote: true %>
-  <% else %>
-    <%= link_to "Follow", follow_user_path(user.id), method: :post, remote: true %>
-  <% end %>
+  # Like unlike logic, and most of it's front end still needs a revamp
 </li>

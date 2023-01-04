@@ -6,41 +6,37 @@ class UsersController < ApplicationController
     @users = User.where.not(id: current_user.id)
   end
 
-  def follow
-    redirect_to user_path(@user) if current_user.follow(@user.id)
-  end
+  # THERE MUST BE A BETTER WAY
+  # def follow
+  #   redirect_to user_path(@user) if current_user.follow(@user.id)
+  # end
 
-  def unfollow
-    redirect_to user_path(@user) if current_user.unfollow(@user.id)
-  end
+  # def unfollow
+  #   redirect_to user_path(@user) if current_user.unfollow(@user.id)
+  # end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
+    redirect_to user_path(current_user) if @user.blank?
     @coffees = Coffee.where(user_id: @user)
     @reviews = Review.where(user_id: @user)
     @likes = Like.where(user_id: @user)
   end
 
-  def edit
-    current_user
-  end
+  def edit; end
 
   def update
-    # authorize @user
-    if current_user.update(user_params)
-      redirect_to user_path(current_user)
-    else
-      render :edit
-    end
+    return redirect_to user_path(current_user) if current_user.update(user_params)
+
+    render :edit
   end
 
-  private
-
-  def user_params
+  private def user_params
     params.require(:user).permit(:first_name, :about, :photo)
   end
 
-  def set_user
-    @user = User.find(params[:id])
-  end
+  # I GUESS THERE'S NO NEED FOR THIS
+  # private def set_user
+  #   @user = User.find(params[:id])
+  # end
 end

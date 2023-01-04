@@ -80,14 +80,14 @@ class CoffeesController < ApplicationController
 
   def coffee_map
     @coffees = Coffee.all
-    @markers = @coffees.geocoded.map do |coffee|
-      {
-        lat: coffee.latitude,
-        lng: coffee.longitude,
-        infoWindow: render_to_string(partial: "info_window", locals: { coffee: coffee }),
-        image_url: helpers.asset_url('icon.png')
-      }
-    end
+    # @markers = @coffees.geocoded.map do |coffee|
+    #   {
+    #     lat: coffee.latitude,
+    #     lng: coffee.longitude,
+    #     infoWindow: render_to_string(partial: "info_window", locals: { coffee: coffee }),
+    #     image_url: helpers.asset_url('icon.png')
+    #   }
+    # end
   end
 
   private def coffee_params

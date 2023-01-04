@@ -29,11 +29,9 @@ class CoffeesController < ApplicationController
     @coffee = Coffee.new(coffee_params)
     @coffee.user = current_user
     @coffee.address = params[:coffee][:address]
-    if @coffee.save
-      redirect_to coffee_path(@coffee)
-    else
-      render :new
-    end
+    redirect_to coffee_path(@coffee) if @coffee.save
+
+    render :new
   end
 
   def edit; end
@@ -80,6 +78,7 @@ class CoffeesController < ApplicationController
 
   def coffee_map
     @coffees = Coffee.all
+    # Implements map
     # @markers = @coffees.geocoded.map do |coffee|
     #   {
     #     lat: coffee.latitude,
@@ -117,8 +116,6 @@ class CoffeesController < ApplicationController
   end
 
   private def edit_permit
-    unless current_user.id == @coffee.user_id
-      redirect_to coffee_path(@coffee)
-    end
+    return redirect_to coffee_path(@coffee) unless current_user.id == @coffee.user_id
   end
 end

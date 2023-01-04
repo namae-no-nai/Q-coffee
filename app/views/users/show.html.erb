@@ -1,0 +1,121 @@
+
+
+<div style= "background-image: url(<%= image_path('coffee22.jpg') %>); height: 200px; background-size: cover", class="container">
+</div>
+
+<div class="container-profile col-xs-12">
+
+
+  <div id="profile">
+    <div class="d-flex justify-content-center">
+      <img class="avatar" src="https://images.unsplash.com/photo-1579454824457-8f6bf05a597c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=889&q=80">
+    </div>
+    <br>
+    <div class="text-center">
+      <h2><strong><%= @user.first_name %></strong></h2>
+      <p><%= @user.about %></p>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="mr-3 text-center">
+          <h3><strong><%= @user.following.count %></h3></strong>
+          <h6>Seguindo</h6>
+        </div>
+        <div class="ml-3 text-center">
+          <h3><strong><%= @user.followers.count %></h3></strong>
+          <h6>Seguidores</h6>
+        </div>
+    </div>
+  </div>
+
+
+  <ul class="list-group">
+    <div class="d-flex justify-content-center">
+
+    <% if user_signed_in? %>
+      <% unless current_user == @user %>
+        <div>
+          <% if @user.followers.exists? current_user.id %>
+            <li  id="unfollow" class="mt-2">
+              <%= link_to "Seguindo", unfollow_user_path, method: :post, remote: :true, class:'btn btn-ghost-follow' %>
+            </li>
+          <% else %>
+            <li  id="follow" class="mt-2">
+              <%= link_to "Seguir", follow_user_path, method: :post, remote: :true, class:'btn btn-ghost-follow' %>
+            </li>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+    </div>
+
+    <li class="list-group-item d-flex justify-content-between align-items-center borderless mt-3">
+      <%= link_to my_coffees_path(@user) do %>
+        <%= image_tag('copo-cafe.png', style:"width: 30px;")%>
+          <% if user_signed_in? %>
+            <% if current_user == @user %>
+              Meus cafés
+            <% else %>
+              Cafés
+            <%end %>
+          <%end%>
+      <% end %>
+        <%= @coffees.count%>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between align-items-center borderless">
+      <%= link_to my_reviews_path(@user) do %>
+        <%= image_tag('review.png', style:"width: 30px;")%>
+        <% if user_signed_in? %>
+            <% if current_user == @user %>
+              Minhas reviews
+            <% else %>
+              Reviews
+            <%end %>
+          <%end%>
+      <% end %>
+        <%= @reviews.count%>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between align-items-center borderless">
+      <%= link_to liked_coffees_path(@user) do %>
+        <%= image_tag('grao.png', style:"width: 30px;")%>
+        <% if user_signed_in? %>
+            <% if current_user == @user %>
+              Meus favoritos
+            <% else %>
+              Favoritos
+            <%end %>
+          <%end%>
+      <% end %>
+        <%= @likes.count%>
+    </li>
+
+    <% if user_signed_in? %>
+
+      <% if current_user == @user %>
+        <li class="list-group-item d-flex justify-content-between align-items-center borderless">
+          <%= link_to new_coffee_path do %>
+            <%= image_tag('bag.png', style:"width: 30px;")%>
+            Adicionar café
+          <% end %>
+        </li>
+
+        <li class="list-group-item d-flex justify-content-between align-items-center borderless">
+          <%= link_to edit_user_registration_path do %>
+            <%= image_tag('pencil.png', style:"width: 25px;")%>
+            Editar perfil
+          <% end %>
+        </li>
+
+        <% if current_user == @user %>
+        <li class="list-group-item d-flex justify-content-between align-items-center borderless">
+          <%= link_to "Sair da minha conta", destroy_user_session_path, method: :delete %>
+          <% end %>
+        </li>
+      <% end %>
+
+    <% end %>
+  </ul>
+
+
+</div>

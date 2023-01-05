@@ -1,0 +1,37 @@
+<% if @reviews.any? %>
+
+    <% if @user == current_user %>
+    <div class="head-reviews">
+      <h4>Minhas reviews</h4>
+    </div>
+    <% else %>
+      <h3>Reviews feitas por: <%= @user.first_name %></h3>
+    <% end %>
+
+  <div class="container">
+      <% @reviews.each do |review| %>
+        <div class="container">
+          <div class="card-review">
+          <p>
+            <%= link_to review.coffee.name, coffee_path(review.coffee), style:"color: black;" %>
+          </p>
+            <p>
+              <%= review.content %>
+            </p>
+            <div class="row justify-content-around">
+              <p>
+              <% review.rating.times do %>
+                <i class="fas fa-star", style="color: #fece02;"></i>
+              <% end %>
+              <% (5 - review.rating).times do %>
+                 <i class="far fa-star", style="color: #fece02;"></i>
+              <% end %>
+              <br>
+              <p><i class="fas fa-thumbs-up", style="color: #9a2a19;"></i> <%= review.review_likes.count %></p>
+              </p>
+            </div>
+          </div>
+      </div>
+      <% end %>
+  </div>
+<% end %>

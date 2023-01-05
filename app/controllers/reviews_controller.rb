@@ -8,6 +8,11 @@ class ReviewsController < ApplicationController
     @reviews = Review.where(params[:coffee_id])
   end
 
+  def my_reviews
+    @user = User.find(params[:user_id])
+    @reviews = Review.where(user: @user)
+  end
+
   def new
     @review = Review.new
   end

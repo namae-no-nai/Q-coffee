@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post 'photos', to: 'photos#create', as: 'photos'
   get 'liked_coffees/:id', to: 'coffees#liked_coffees', as: 'liked_coffees'
   get 'my_coffees/:user_id', to: 'coffees#my_coffees', as: 'my_coffees'
-  get 'my_reviews/:id', to: 'coffees#my_reviews', as: 'my_reviews'
+  get 'my_reviews/:user_id', to: 'reviews#my_reviews', as: 'my_reviews'
   get 'filter/:filter_param', to: 'pages#filter', as: 'filter'
   get 'map', to: 'coffees#coffee_map', as: 'coffee_map'
 

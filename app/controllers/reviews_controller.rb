@@ -8,9 +8,6 @@ class ReviewsController < ApplicationController
     @reviews = Review.where(params[:coffee_id])
   end
 
-  def info_window
-  end
-
   def new
     @review = Review.new
   end
@@ -27,15 +24,12 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
-    if @review.update(reviews_params)
-      redirect_to coffee_path(@review.coffee)
-    else
-      render :edit
-    end
+    redirect_to coffee_path(@review.coffee) if @review.update(reviews_params)
+
+    render :edit
   end
 
   def destroy
@@ -43,23 +37,19 @@ class ReviewsController < ApplicationController
     redirect_to coffee_path(@review.coffee)
   end
 
-  private
-
-  def reviews_params
+  private def reviews_params
     params.require(:review).permit(:content, :rating)
   end
 
-  def set_coffee
+  private def set_coffee
     @coffee = Coffee.find(params[:coffee_id])
   end
 
-  def set_review
+  private def set_review
     @review = Review.find(params[:id])
   end
 
-  def edit_permit
-    unless current_user.id == @review.user_id
-      redirect_to coffee_path(@coffee)
-    end
+  private def edit_permit
+    redirect_to coffee_path(@coffee) unless current_user.id == @review.user_id
   end
 end

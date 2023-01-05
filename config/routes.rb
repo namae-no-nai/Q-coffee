@@ -6,8 +6,7 @@ Rails.application.routes.draw do
 
   get 'category/:category_name', to: 'coffees#category', as: 'category'
   get 'ocr', to: 'photos#ocr'
-  get 'photo_search_path/:pic', to: 'photos#photo_search', as: 'photo_search'
-  post 'photos', to: 'photos#create', as: 'photos'
+  get 'search', to: 'coffees#search'
   get 'liked_coffees/:id', to: 'coffees#liked_coffees', as: 'liked_coffees'
   get 'my_coffees/:user_id', to: 'coffees#my_coffees', as: 'my_coffees'
   get 'my_reviews/:user_id', to: 'reviews#my_reviews', as: 'my_reviews'

@@ -1,0 +1,24 @@
+<div class="container-coffees">
+  <% if @coffees.empty? %>
+    <h3> Nenhum café cadastrado</h3>
+  <% else %>
+    <% @coffees.each do |coffee| %>
+        <div class="card-product mt-3">
+          <% if coffee.photo.attached? %>
+            <%= cl_image_tag coffee.photo.key, style:"width: 150px; height: 150px; crop: :fill" %>
+           <% else %>
+             <%= image_tag "coffee-pack.png",style:"width: 150px; height: 150px; crop: :fill"%>
+           <% end %>
+            <div class="card-product-infos">
+            <%= coffee.brand %>
+            <br>
+            <b><%= link_to coffee.name, coffee_path(coffee) %></b>
+            <% if user_signed_in? && coffee.user_id == current_user.id %>
+              <%= link_to 'Editar café', edit_coffee_path(coffee) %>
+              <%= link_to 'Deletar café',coffee_path(coffee), method: :delete %>
+            <% end %>
+          </div>
+        </div>
+    <% end %>
+  <% end %>
+</div>

@@ -20,10 +20,11 @@ class CoffeesController < ApplicationController
     @coffee = Coffee.new
   end
 
-  def my_coffee
-    @like = Like.where(user_id: current_user)
-    @coffes = @like.coffee
-  end
+  # My liked coffees?
+  # def my_coffee
+  #   @like = Like.where(user_id: current_user)
+  #   @coffes = @like.coffee
+  # end
 
   def create
     @coffee = Coffee.new(coffee_params)
@@ -37,11 +38,9 @@ class CoffeesController < ApplicationController
   def edit; end
 
   def update
-    if @coffee.update(coffee_params)
-      redirect_to coffee_path(@coffee)
-    else
-      render :edit
-    end
+    redirect_to coffee_path(@coffee) if @coffee.update(coffee_params)
+
+    render :edit
   end
 
   def destroy
@@ -80,21 +79,12 @@ class CoffeesController < ApplicationController
   def coffee_map
     @coffees = Coffee.all
     # Implements map
-    # @markers = @coffees.geocoded.map do |coffee|
-    #   {
-    #     lat: coffee.latitude,
-    #     lng: coffee.longitude,
-    #     infoWindow: render_to_string(partial: "info_window", locals: { coffee: coffee }),
-    #     image_url: helpers.asset_url('icon.png')
-    #   }
-    # end
   end
 
   private def coffee_params
     params.require(:coffee).permit(:name, :brand,
                                    :farm, :roast, :sensory,
-                                   :origin_id, :taste,
-                                   :store)
+                                   :origin_id, :taste,)
   end
 
   private def set_coffee

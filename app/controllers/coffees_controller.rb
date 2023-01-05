@@ -72,7 +72,6 @@ class CoffeesController < ApplicationController
   end
 
   def my_coffees
-    debugger
     @user = User.find(params[:user_id])
     @coffees = Coffee.where(user: @user)
   end

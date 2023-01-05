@@ -1,0 +1,8 @@
+<div class="head-reviews">
+  <% if @user == current_user %>
+    <h4>Meus cafés</h4>
+  <% else %>
+    <h3>Cafés cadastrados por: <%= @user.first_name %></h3>
+  <% end %>
+</div>
+  <%= render 'list' %>

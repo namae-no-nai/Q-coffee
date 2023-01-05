@@ -61,10 +61,11 @@ class CoffeesController < ApplicationController
     end
   end
 
-  def liked_coffees
-    @user = User.find(params[:id])
-    @likes = Like.where(user: @user)
-  end
+  # Major reimplementation
+  # def liked_coffees
+  #   @user = User.find(params[:id])
+  #   @likes = Like.where(user: @user)
+  # end
 
   def my_reviews
     @user = User.find(params[:id])

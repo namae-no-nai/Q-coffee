@@ -1,5 +1,5 @@
 class CoffeesController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[index show category search coffee_map]
+  skip_before_action :authenticate_user!, only: %i[index show category]
   before_action :set_coffee, only: %i[show edit update destroy]
   before_action :coffee_settings, only: %i[new create edit update]
   before_action :edit_permit, only: :edit
@@ -72,7 +72,8 @@ class CoffeesController < ApplicationController
   end
 
   def my_coffees
-    @user = User.find(params[:id])
+    debugger
+    @user = User.find(params[:user_id])
     @coffees = Coffee.where(user: @user)
   end
 

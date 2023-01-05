@@ -1,0 +1,8 @@
+<div class="container mt-3", style="background-color: #ebe9e96e; padding: 20px; border-radius: 10px 50px 10px 10px;">
+  <h5 style="text-align: center;"><strong>O que você tem a dizer sobre <%= @coffee.name %>?</strong></h5>
+  <%= simple_form_for([@coffee, @review]) do |f| %>
+    <%= f.input :content, label: 'Eu achei...' %>
+    <%= f.input :rating, collection: (1..5).to_a, label: 'Minha nota é' %>
+    <%= f.button :submit, "Avaliar", class:"btn-ghost" %>
+  <% end %>
+</div>

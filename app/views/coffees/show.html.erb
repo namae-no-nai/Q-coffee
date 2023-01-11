@@ -4,13 +4,13 @@
   <meta property="og:title"         content="<%= @coffee.name %>"/>
   <meta property="og:description"   content="Descubra este cafe" />
 	<meta property="og:image"         content="https://images.unsplash.com/photo-1511920170033-f8396924c348?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" />
+
 <% end %>
 
 <div class="top-images" id="banner">
   <%= image_tag "field.jpg", style:"width: 100%; height: 25%;"%>
   <div class="bottom-image", style="border-radius: 0px 75px 0px 0px; background-color: white; margin-top: 20px; width: 100%; margin: 0 auto;">
-
-       <%= image_tag "coffee-pack.png", id:"coffee-label", style:"width: 50%; height: 30%; margin-left: 10px;"%>
+    <%= image_tag "coffee-pack.png", id:"coffee-label", style:"width: 50%; height: 30%; margin-left: 10px;"%>
       <div class="rating">
         <% if @average == 0 %>
           <div>
@@ -42,11 +42,10 @@
 
       <% if user_signed_in? && current_user.id != @coffee.user_id %>
         <% image_path =  @like.any? ? 'fas' : 'far' %>
-          <p><%= link_to "<i class='#{image_path} fa-heart', style='color: #9a2a19;'></i>".html_safe,
+          <%= link_to("<i class='#{image_path} fa-heart', style='color: #9a2a19;'></i>".html_safe,
                  coffee_toggle_like_path(@coffee),
-                 remote: true,
-                 method: :post,
-                 id:'heart' %></p>
+                 data: {'turbo_method': :post},
+                 id:'heart') %>
       <% end %>
     </div>
   </div>
@@ -81,8 +80,7 @@
               <% image_path =  review.review_likes.any? ? 'fas' : 'far' %>
                 <p><%= link_to "<i class='#{image_path} fa-thumbs-up'></i>".html_safe,
                        review_toggle_review_like_path(review),
-                       remote: true,
-                       method: :post,
+                       data: {'turbo_method': :post},
                        id:"review-#{review.id}" %> <span id="review-<%= review.id %>-count"><%= review.review_likes.count %></span></p>
           <% end %>
         </p>
@@ -93,5 +91,3 @@
       <% end %>
     </div>
 <% end %>
-
-

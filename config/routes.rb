@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   get 'filter/:filter_param', to: 'pages#filter', as: 'filter'
   get 'map', to: 'coffees#coffee_map', as: 'coffee_map'
 
-
   resources :coffees do
     post 'toggle_like', to: 'likes#toggle'
     resources :reviews, only: [:create, :new, :update, :edit]

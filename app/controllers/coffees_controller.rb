@@ -53,11 +53,7 @@ class CoffeesController < ApplicationController
   end
 
   def search
-    if params[:query].present?
-      @coffees = Coffee.global_search(params[:query])
-    else
-      @coffees = Coffee.all
-    end
+    params[:query].present? ? @coffees = Coffee.global_search(params[:query]) : @coffees = Coffee.all
   end
 
   # Major reimplementation

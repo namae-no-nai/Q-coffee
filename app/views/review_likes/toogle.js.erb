@@ -1,0 +1,8 @@
+review = document.querySelector('#review-<%= @review.id %> i')
+if (review.classList.contains("fas")) {
+  review.classList.replace("fas", "far")
+} else {
+  review.classList.replace("far", "fas")
+};
+
+document.getElementById('review-<%= @review.id %>-count').innerText = <%= @review.review_likes.count %>;
